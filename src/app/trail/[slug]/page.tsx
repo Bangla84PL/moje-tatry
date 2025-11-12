@@ -400,7 +400,7 @@ export default async function TrailPage({ params }: PageProps) {
               {trail.title}
             </h1>
             <div className="flex flex-wrap gap-2">
-              {trail.regions.nodes.map((region) => (
+              {trail.regions?.nodes?.map((region) => (
                 <span
                   key={region.id}
                   className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-white/20 backdrop-blur-sm text-white"

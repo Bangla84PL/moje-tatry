@@ -216,7 +216,7 @@ export default function TrailsPage() {
     // Filter by region
     if (filters.region) {
       result = result.filter((trail) =>
-        trail.regions.nodes.some((r) => r.slug === filters.region)
+        trail.regions?.nodes?.some((r) => r.slug === filters.region) ?? false
       );
     }
 
@@ -230,21 +230,21 @@ export default function TrailsPage() {
     // Filter by season
     if (filters.season && filters.season.length > 0) {
       result = result.filter((trail) =>
-        trail.seasons.nodes.some((s) => filters.season!.includes(s.slug))
+        trail.seasons?.nodes?.some((s) => filters.season!.includes(s.slug)) ?? false
       );
     }
 
     // Filter by trail type
     if (filters.trailType && filters.trailType.length > 0) {
       result = result.filter((trail) =>
-        trail.trailTypes.nodes.some((t) => filters.trailType!.includes(t.slug))
+        trail.trailTypes?.nodes?.some((t) => filters.trailType!.includes(t.slug)) ?? false
       );
     }
 
     // Filter by features
     if (filters.features && filters.features.length > 0) {
       result = result.filter((trail) =>
-        filters.features!.some((f) => trail.features.nodes.some((tf) => tf.slug === f))
+        filters.features!.some((f) => trail.features?.nodes?.some((tf) => tf.slug === f) ?? false)
       );
     }
 
