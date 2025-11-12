@@ -23,6 +23,13 @@ module.exports = {
           light: '#FFD678',
           dark: '#E6B34E',
         },
+        background: 'var(--color-background)',
+        surface: 'var(--color-surface)',
+        text: {
+          primary: 'var(--color-text-primary)',
+          secondary: 'var(--color-text-secondary)',
+          tertiary: 'var(--color-text-tertiary)',
+        },
         difficulty: {
           easy: '#28A745',
           moderate: '#FFC107',

@@ -5,6 +5,7 @@
  */
 
 import { ApolloClient, InMemoryCache, HttpLink, from } from '@apollo/client';
+import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { onError } from '@apollo/client/link/error';
 import { setContext } from '@apollo/client/link/context';
 
@@ -12,17 +13,18 @@ import { setContext } from '@apollo/client/link/context';
 const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'http://localhost:8080/graphql';
 
 // Error handling link
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({ message, locations, path }) => {
+const errorLink = onError(({ error, operation }) => {
+  if (CombinedGraphQLErrors.is(error)) {
+    error.errors.forEach(({ message, locations, path }) => {
       console.error(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}, Operation: ${operation.operationName}`
       );
     });
+    return;
   }
 
-  if (networkError) {
-    console.error(`[Network error]: ${networkError}`);
+  if (error) {
+    console.error(`[Network error]: ${error}`);
   }
 });
 

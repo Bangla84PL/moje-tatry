@@ -12,6 +12,7 @@ import { TrailStats } from '@/components/trail/TrailStats';
 import { MapView } from '@/components/map/MapView';
 import { TrailCard } from '@/components/trail/TrailCard';
 import { Button } from '@/components/common/Button';
+import { ShareButtons } from '@/components/trail/ShareButtons';
 import type { Trail } from '@/types';
 
 // TODO: Replace with actual GraphQL query when WordPress is configured
@@ -71,6 +72,7 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'region-1',
+          databaseId: 1,
           name: 'Tatry Wysokie',
           slug: 'high-tatras',
         },
@@ -80,11 +82,13 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
         {
           id: 'season-2',
+          databaseId: 2,
           name: 'Jesień',
           slug: 'fall',
         },
@@ -94,6 +98,7 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -103,23 +108,26 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'feature-1',
+          databaseId: 1,
           name: 'Jezioro',
           slug: 'lake',
         },
         {
           id: 'feature-2',
+          databaseId: 2,
           name: 'Schronisko',
           slug: 'mountain-hut',
         },
         {
           id: 'feature-3',
+          databaseId: 3,
           name: 'Punkt widokowy',
           slug: 'viewpoint',
         },
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },
@@ -166,6 +174,7 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'region-2',
+          databaseId: 2,
           name: 'Tatry Zachodnie',
           slug: 'western-tatras',
         },
@@ -175,6 +184,7 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
@@ -184,6 +194,7 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -193,18 +204,20 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'feature-4',
+          databaseId: 4,
           name: 'Szczyt',
           slug: 'peak',
         },
         {
           id: 'feature-3',
+          databaseId: 3,
           name: 'Punkt widokowy',
           slug: 'viewpoint',
         },
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },
@@ -251,6 +264,7 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'region-2',
+          databaseId: 2,
           name: 'Tatry Zachodnie',
           slug: 'western-tatras',
         },
@@ -260,21 +274,25 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
         {
           id: 'season-2',
+          databaseId: 2,
           name: 'Jesień',
           slug: 'fall',
         },
         {
           id: 'season-3',
+          databaseId: 3,
           name: 'Zima',
           slug: 'winter',
         },
         {
           id: 'season-4',
+          databaseId: 4,
           name: 'Wiosna',
           slug: 'spring',
         },
@@ -284,6 +302,7 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -293,13 +312,14 @@ const mockTrails: Record<string, Trail> = {
       nodes: [
         {
           id: 'feature-3',
+          databaseId: 3,
           name: 'Punkt widokowy',
           slug: 'viewpoint',
         },
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },
@@ -400,7 +420,7 @@ export default async function TrailPage({ params }: PageProps) {
               {trail.title}
             </h1>
             <div className="flex flex-wrap gap-2">
-              {trail.regions.nodes.map((region) => (
+              {trail.regions?.nodes?.map((region) => (
                 <span
                   key={region.id}
                   className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-white/20 backdrop-blur-sm text-white"
@@ -433,8 +453,8 @@ export default async function TrailPage({ params }: PageProps) {
                 {/* Map Card */}
                 <div className="card overflow-hidden">
                   <MapView
-                    latitude={parseFloat(trail.trailData.gpsLatitude)}
-                    longitude={parseFloat(trail.trailData.gpsLongitude)}
+                    latitude={parseFloat(trail.trailData.gpsLatitude ?? '0')}
+                    longitude={parseFloat(trail.trailData.gpsLongitude ?? '0')}
                     trailName={trail.title}
                   />
                 </div>
@@ -447,7 +467,7 @@ export default async function TrailPage({ params }: PageProps) {
                         Atrakcje
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {trail.features.nodes.map((feature) => (
+                        {trail.features?.nodes?.map((feature) => (
                           <span
                             key={feature.id}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-text-secondary"
@@ -468,7 +488,7 @@ export default async function TrailPage({ params }: PageProps) {
                         Polecane pory roku
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {trail.seasons.nodes.map((season) => (
+                        {trail.seasons?.nodes?.map((season) => (
                           <span
                             key={season.id}
                             className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary"
@@ -503,38 +523,7 @@ export default async function TrailPage({ params }: PageProps) {
                 <h3 className="text-lg font-heading font-semibold text-text-primary mb-4">
                   Podziel się tym szlakiem
                 </h3>
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      // TODO: Implement share functionality
-                      console.log('Share on Facebook');
-                    }}
-                  >
-                    Facebook
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      // TODO: Implement share functionality
-                      console.log('Share on Twitter');
-                    }}
-                  >
-                    Twitter
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      // TODO: Implement copy link
-                      console.log('Copy link');
-                    }}
-                  >
-                    Kopiuj link
-                  </Button>
-                </div>
+                <ShareButtons language="pl" />
               </div>
 
               {/* Comments Section Placeholder */}

@@ -48,6 +48,7 @@ const mockFeaturedTrails: Trail[] = [
       nodes: [
         {
           id: 'region-1',
+          databaseId: 1,
           name: 'Tatry Wysokie',
           slug: 'high-tatras',
         },
@@ -57,6 +58,7 @@ const mockFeaturedTrails: Trail[] = [
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
@@ -66,6 +68,7 @@ const mockFeaturedTrails: Trail[] = [
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -75,13 +78,14 @@ const mockFeaturedTrails: Trail[] = [
       nodes: [
         {
           id: 'feature-1',
+          databaseId: 1,
           name: 'Jezioro',
           slug: 'lake',
         },
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },

@@ -39,10 +39,11 @@ export function TrailFilters({
   };
 
   const handleDifficultyToggle = (slug: string) => {
-    const currentDifficulties = filters.difficulty || [];
-    const newDifficulties = currentDifficulties.includes(slug)
-      ? currentDifficulties.filter((d) => d !== slug)
-      : [...currentDifficulties, slug];
+    const difficultySlug = slug as Difficulty;
+    const currentDifficulties: Difficulty[] = filters.difficulty ?? [];
+    const newDifficulties = currentDifficulties.includes(difficultySlug)
+      ? currentDifficulties.filter((d) => d !== difficultySlug)
+      : [...currentDifficulties, difficultySlug];
     onFiltersChange({ ...filters, difficulty: newDifficulties.length > 0 ? newDifficulties : undefined });
   };
 

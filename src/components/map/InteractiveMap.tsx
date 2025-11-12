@@ -136,7 +136,7 @@ export function InteractiveMap({
           {markers.map((marker) => (
             <Marker
               key={marker.id}
-              position={{ lat: marker.location.lat, lng: marker.location.lng }}
+              position={{ lat: marker.position.lat, lng: marker.position.lng }}
               icon={getDifficultyMarkerIcon(marker.difficulty)}
               title={marker.title}
               onClick={() => handleMarkerClick(marker)}
@@ -146,8 +146,8 @@ export function InteractiveMap({
           {selectedMarker && (
             <InfoWindow
               position={{
-                lat: selectedMarker.location.lat,
-                lng: selectedMarker.location.lng,
+                lat: selectedMarker.position.lat,
+                lng: selectedMarker.position.lng,
               }}
               onCloseClick={handleInfoWindowClose}
             >

@@ -5,6 +5,10 @@
 .env.test.local
 .env.production.local
 
+# Template files with secrets
+.mcp.json.template
+.env.example.template
+
 # Dependencies
 node_modules/
 npm-debug.log*

@@ -6,26 +6,10 @@
  */
 
 import type { Metadata } from 'next';
-import { Open_Sans, Montserrat } from 'next/font/google';
 import './globals.css';
 import { ApolloWrapper } from '@/lib/wordpress/ApolloWrapper';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-
-// Font configurations
-const openSans = Open_Sans({
-  subsets: ['latin', 'latin-ext'], // latin-ext includes Polish characters
-  variable: '--font-open-sans',
-  display: 'swap',
-  weight: ['400', '600', '700'],
-});
-
-const montserrat = Montserrat({
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-montserrat',
-  display: 'swap',
-  weight: ['600', '700', '800'],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -105,14 +89,7 @@ export default function RootLayout({
   const language = 'pl';
 
   return (
-    <html
-      lang={language}
-      className={`${openSans.variable} ${montserrat.variable}`}
-      suppressHydrationWarning
-    >
-      <head>
-        {/* Additional head elements can go here */}
-      </head>
+    <html lang={language} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col bg-background font-sans antialiased">
         <ApolloWrapper>
           {/* Header */}

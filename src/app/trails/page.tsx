@@ -44,18 +44,18 @@ const mockTrails: Trail[] = [
       gpsLongitude: '20.0731',
     },
     regions: {
-      nodes: [{ id: 'region-1', name: 'Tatry Wysokie', slug: 'high-tatras' }],
+      nodes: [{ id: 'region-1', databaseId: 1, name: 'Tatry Wysokie', slug: 'high-tatras' }],
     },
     seasons: {
-      nodes: [{ id: 'season-1', name: 'Lato', slug: 'summer' }],
+      nodes: [{ id: 'season-1', databaseId: 1, name: 'Lato', slug: 'summer' }],
     },
     trailTypes: {
-      nodes: [{ id: 'type-1', name: 'Tam i z powrotem', slug: 'out-and-back' }],
+      nodes: [{ id: 'type-1', databaseId: 1, name: 'Tam i z powrotem', slug: 'out-and-back' }],
     },
     features: {
-      nodes: [{ id: 'feature-1', name: 'Jezioro', slug: 'lake' }],
+      nodes: [{ id: 'feature-1', databaseId: 1, name: 'Jezioro', slug: 'lake' }],
     },
-    language: { code: 'PL', name: 'Polski' },
+    language: { code: 'pl', name: 'Polski' },
   },
   {
     id: '2',
@@ -82,24 +82,24 @@ const mockTrails: Trail[] = [
       gpsLongitude: '19.9333',
     },
     regions: {
-      nodes: [{ id: 'region-2', name: 'Tatry Zachodnie', slug: 'western-tatras' }],
+      nodes: [{ id: 'region-2', databaseId: 2, name: 'Tatry Zachodnie', slug: 'western-tatras' }],
     },
     seasons: {
       nodes: [
-        { id: 'season-1', name: 'Lato', slug: 'summer' },
-        { id: 'season-2', name: 'Jesień', slug: 'fall' },
+        { id: 'season-1', databaseId: 1, name: 'Lato', slug: 'summer' },
+        { id: 'season-2', databaseId: 2, name: 'Jesień', slug: 'fall' },
       ],
     },
     trailTypes: {
-      nodes: [{ id: 'type-1', name: 'Tam i z powrotem', slug: 'out-and-back' }],
+      nodes: [{ id: 'type-1', databaseId: 1, name: 'Tam i z powrotem', slug: 'out-and-back' }],
     },
     features: {
       nodes: [
-        { id: 'feature-2', name: 'Szczyt', slug: 'peak' },
-        { id: 'feature-3', name: 'Punkt widokowy', slug: 'viewpoint' },
+        { id: 'feature-2', databaseId: 2, name: 'Szczyt', slug: 'peak' },
+        { id: 'feature-3', databaseId: 3, name: 'Punkt widokowy', slug: 'viewpoint' },
       ],
     },
-    language: { code: 'PL', name: 'Polski' },
+    language: { code: 'pl', name: 'Polski' },
   },
   {
     id: '3',
@@ -126,25 +126,25 @@ const mockTrails: Trail[] = [
       gpsLongitude: '19.8808',
     },
     regions: {
-      nodes: [{ id: 'region-2', name: 'Tatry Zachodnie', slug: 'western-tatras' }],
+      nodes: [{ id: 'region-2', databaseId: 2, name: 'Tatry Zachodnie', slug: 'western-tatras' }],
     },
     seasons: {
       nodes: [
-        { id: 'season-1', name: 'Lato', slug: 'summer' },
-        { id: 'season-2', name: 'Jesień', slug: 'fall' },
-        { id: 'season-3', name: 'Wiosna', slug: 'spring' },
+        { id: 'season-1', databaseId: 1, name: 'Lato', slug: 'summer' },
+        { id: 'season-2', databaseId: 2, name: 'Jesień', slug: 'fall' },
+        { id: 'season-3', databaseId: 3, name: 'Wiosna', slug: 'spring' },
       ],
     },
     trailTypes: {
-      nodes: [{ id: 'type-1', name: 'Tam i z powrotem', slug: 'out-and-back' }],
+      nodes: [{ id: 'type-1', databaseId: 1, name: 'Tam i z powrotem', slug: 'out-and-back' }],
     },
     features: {
       nodes: [
-        { id: 'feature-4', name: 'Wodospad', slug: 'waterfall' },
-        { id: 'feature-5', name: 'Schronisko', slug: 'mountain-hut' },
+        { id: 'feature-4', databaseId: 4, name: 'Wodospad', slug: 'waterfall' },
+        { id: 'feature-5', databaseId: 5, name: 'Schronisko', slug: 'mountain-hut' },
       ],
     },
-    language: { code: 'PL', name: 'Polski' },
+    language: { code: 'pl', name: 'Polski' },
   },
 ];
 
@@ -159,7 +159,7 @@ const mockTaxonomies = {
     { id: 'diff-1', name: 'Łatwy', slug: 'easy', count: 15 },
     { id: 'diff-2', name: 'Umiarkowany', slug: 'moderate', count: 20 },
     { id: 'diff-3', name: 'Trudny', slug: 'difficult', count: 12 },
-    { id: 'diff-4', name: 'Bardzo trudny', slug: 'very-difficult', count: 5 },
+    { id: 'diff-4', name: 'Bardzo trudny', slug: 'very_difficult', count: 5 },
     { id: 'diff-5', name: 'Ekspert', slug: 'expert', count: 3 },
   ],
   seasons: [
@@ -215,36 +215,41 @@ export default function TrailsPage() {
 
     // Filter by region
     if (filters.region) {
-      result = result.filter((trail) =>
-        trail.regions.nodes.some((r) => r.slug === filters.region)
+      result = result.filter(
+        (trail) => trail.regions?.nodes?.some((r) => r.slug === filters.region) ?? false
       );
     }
 
     // Filter by difficulty
-    if (filters.difficulty && filters.difficulty.length > 0) {
-      result = result.filter((trail) =>
-        filters.difficulty!.includes(trail.trailData.difficulty)
-      );
+    const activeDifficulties = filters.difficulty ?? [];
+    if (activeDifficulties.length > 0) {
+      result = result.filter((trail) => activeDifficulties.includes(trail.trailData.difficulty));
     }
 
     // Filter by season
-    if (filters.season && filters.season.length > 0) {
-      result = result.filter((trail) =>
-        trail.seasons.nodes.some((s) => filters.season!.includes(s.slug))
+    const activeSeasons = filters.season ?? [];
+    if (activeSeasons.length > 0) {
+      result = result.filter(
+        (trail) => trail.seasons?.nodes?.some((s) => activeSeasons.includes(s.slug)) ?? false
       );
     }
 
     // Filter by trail type
-    if (filters.trailType && filters.trailType.length > 0) {
-      result = result.filter((trail) =>
-        trail.trailTypes.nodes.some((t) => filters.trailType!.includes(t.slug))
+    const activeTrailTypes = filters.trailType ?? [];
+    if (activeTrailTypes.length > 0) {
+      result = result.filter(
+        (trail) => trail.trailTypes?.nodes?.some((t) => activeTrailTypes.includes(t.slug)) ?? false
       );
     }
 
     // Filter by features
-    if (filters.features && filters.features.length > 0) {
-      result = result.filter((trail) =>
-        filters.features!.some((f) => trail.features.nodes.some((tf) => tf.slug === f))
+    const activeFeatures = filters.features ?? [];
+    if (activeFeatures.length > 0) {
+      result = result.filter(
+        (trail) =>
+          activeFeatures.some((featureSlug) =>
+            trail.features?.nodes?.some((tf) => tf.slug === featureSlug)
+          )
       );
     }
 

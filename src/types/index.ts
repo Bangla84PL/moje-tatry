@@ -90,21 +90,13 @@ export interface TaxonomyTerm {
   count?: number;
 }
 
-export interface Region extends TaxonomyTerm {
-  // Specific region properties if needed
-}
+export type Region = TaxonomyTerm;
 
-export interface Season extends TaxonomyTerm {
-  // Specific season properties if needed
-}
+export type Season = TaxonomyTerm;
 
-export interface TrailType extends TaxonomyTerm {
-  // Specific trail type properties if needed
-}
+export type TrailType = TaxonomyTerm;
 
-export interface Feature extends TaxonomyTerm {
-  // Specific feature properties if needed
-}
+export type Feature = TaxonomyTerm;
 
 // ============================================
 // Comment Types
@@ -244,7 +236,7 @@ export interface SeoMetadata {
 // ============================================
 
 export interface TrailFilters {
-  region?: string[];
+  region?: string;
   difficulty?: Difficulty[];
   season?: string[];
   trailType?: string[];
@@ -417,6 +409,8 @@ export interface MarkerData {
   title: string;
   difficulty: Difficulty;
   slug: string;
+  distance?: number;
+  region?: string;
 }
 
 export interface MapBounds {

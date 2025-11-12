@@ -9,7 +9,7 @@
 
 import { useState, useMemo } from 'react';
 import { InteractiveMap } from '@/components/map/InteractiveMap';
-import type { Trail, TrailFilters } from '@/types';
+import type { Trail, TrailFilters, Difficulty, MarkerData } from '@/types';
 
 // TODO: Replace with actual GraphQL query when WordPress is configured
 // import { apolloClient } from '@/lib/wordpress/client';
@@ -48,6 +48,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'region-1',
+          databaseId: 1,
           name: 'Tatry Wysokie',
           slug: 'high-tatras',
         },
@@ -57,6 +58,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
@@ -66,6 +68,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -75,13 +78,14 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'feature-1',
+          databaseId: 1,
           name: 'Jezioro',
           slug: 'lake',
         },
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },
@@ -116,6 +120,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'region-2',
+          databaseId: 2,
           name: 'Tatry Zachodnie',
           slug: 'western-tatras',
         },
@@ -125,6 +130,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
@@ -134,6 +140,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -143,13 +150,14 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'feature-2',
+          databaseId: 2,
           name: 'Szczyt',
           slug: 'peak',
         },
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },
@@ -184,6 +192,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'region-2',
+          databaseId: 2,
           name: 'Tatry Zachodnie',
           slug: 'western-tatras',
         },
@@ -193,6 +202,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
@@ -202,6 +212,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -211,13 +222,14 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'feature-3',
+          databaseId: 3,
           name: 'Punkt widokowy',
           slug: 'viewpoint',
         },
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },
@@ -240,8 +252,8 @@ export default function MapPage() {
     let result = [...trails];
 
     if (filters.region) {
-      result = result.filter((trail) =>
-        trail.regions.nodes.some((r) => r.slug === filters.region)
+      result = result.filter(
+        (trail) => trail.regions?.nodes.some((r) => r.slug === filters.region) ?? false
       );
     }
 
@@ -250,29 +262,52 @@ export default function MapPage() {
     }
 
     if (filters.season && filters.season.length > 0) {
-      result = result.filter((trail) =>
-        trail.seasons.nodes.some((s) => filters.season?.includes(s.slug))
+      result = result.filter(
+        (trail) => trail.seasons?.nodes.some((s) => filters.season?.includes(s.slug)) ?? false
       );
     }
 
     if (filters.trailType && filters.trailType.length > 0) {
-      result = result.filter((trail) =>
-        trail.trailTypes.nodes.some((t) => filters.trailType?.includes(t.slug))
+      result = result.filter(
+        (trail) => trail.trailTypes?.nodes.some((t) => filters.trailType?.includes(t.slug)) ?? false
       );
     }
 
     if (filters.features && filters.features.length > 0) {
-      result = result.filter((trail) =>
-        trail.features.nodes.some((f) => filters.features?.includes(f.slug))
+      result = result.filter(
+        (trail) => trail.features?.nodes.some((f) => filters.features?.includes(f.slug)) ?? false
       );
     }
 
     return result;
   }, [trails, filters]);
 
-  const handleToggleDifficulty = (difficulty: string) => {
+  const markers = useMemo<MarkerData[]>(() => {
+    return filteredTrails.reduce<MarkerData[]>((acc, trail) => {
+      const lat = trail.trailData.gpsLatitude ? parseFloat(trail.trailData.gpsLatitude) : null;
+      const lng = trail.trailData.gpsLongitude ? parseFloat(trail.trailData.gpsLongitude) : null;
+
+      if (lat === null || lng === null || Number.isNaN(lat) || Number.isNaN(lng)) {
+        return acc;
+      }
+
+      acc.push({
+        id: trail.id,
+        position: { lat, lng },
+        title: trail.title,
+        difficulty: trail.trailData.difficulty,
+        slug: trail.slug,
+        distance: trail.trailData.distanceKm,
+        region: trail.regions?.nodes[0]?.name,
+      });
+
+      return acc;
+    }, []);
+  }, [filteredTrails]);
+
+  const handleToggleDifficulty = (difficulty: Difficulty) => {
     setFilters((prev) => {
-      const currentDifficulties = prev.difficulty || [];
+      const currentDifficulties: Difficulty[] = prev.difficulty ?? [];
       const newDifficulties = currentDifficulties.includes(difficulty)
         ? currentDifficulties.filter((d) => d !== difficulty)
         : [...currentDifficulties, difficulty];
@@ -298,6 +333,14 @@ export default function MapPage() {
   const hasActiveFilters = Object.keys(filters).some(
     (key) => filters[key as keyof TrailFilters] !== undefined
   );
+
+  const difficultyFilters: Array<{ value: Difficulty; label: string; color: string }> = [
+    { value: 'easy', label: 'Łatwe', color: 'bg-green-500' },
+    { value: 'moderate', label: 'Umiarkowane', color: 'bg-yellow-500' },
+    { value: 'difficult', label: 'Trudne', color: 'bg-orange-500' },
+    { value: 'very_difficult', label: 'Bardzo trudne', color: 'bg-red-500' },
+    { value: 'expert', label: 'Eksperckie', color: 'bg-purple-600' },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -345,13 +388,7 @@ export default function MapPage() {
 
               {/* Difficulty Filters */}
               <div className="flex gap-2">
-                {[
-                  { value: 'easy', label: 'Łatwe', color: 'bg-green-500' },
-                  { value: 'moderate', label: 'Umiarkowane', color: 'bg-yellow-500' },
-                  { value: 'difficult', label: 'Trudne', color: 'bg-orange-500' },
-                  { value: 'very-difficult', label: 'Bardzo trudne', color: 'bg-red-500' },
-                  { value: 'expert', label: 'Eksperckie', color: 'bg-purple-600' },
-                ].map(({ value, label, color }) => (
+                {difficultyFilters.map(({ value, label, color }) => (
                   <button
                     key={value}
                     onClick={() => handleToggleDifficulty(value)}
@@ -423,17 +460,11 @@ export default function MapPage() {
               {/* Difficulty Section */}
               <div>
                 <h3 className="text-sm font-semibold text-text-primary mb-2">Trudność</h3>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { value: 'easy', label: 'Łatwe', color: 'bg-green-500' },
-                    { value: 'moderate', label: 'Umiarkowane', color: 'bg-yellow-500' },
-                    { value: 'difficult', label: 'Trudne', color: 'bg-orange-500' },
-                    { value: 'very-difficult', label: 'Bardzo trudne', color: 'bg-red-500' },
-                    { value: 'expert', label: 'Eksperckie', color: 'bg-purple-600' },
-                  ].map(({ value, label, color }) => (
-                    <button
-                      key={value}
-                      onClick={() => handleToggleDifficulty(value)}
+                  <div className="flex flex-wrap gap-2">
+                    {difficultyFilters.map(({ value, label, color }) => (
+                      <button
+                        key={value}
+                        onClick={() => handleToggleDifficulty(value)}
                       className={`
                         inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
                         ${
@@ -491,7 +522,7 @@ export default function MapPage() {
 
       {/* Interactive Map */}
       <div className="flex-1">
-        <InteractiveMap trails={filteredTrails} language="pl" />
+        <InteractiveMap markers={markers} language="pl" />
       </div>
 
       {/* Legend */}
