@@ -30,6 +30,15 @@ module.exports = {
           veryDifficult: '#DC3545',
           expert: '#6F42C1',
         },
+        // Text colors
+        text: {
+          primary: '#2B2D42',
+          secondary: '#5A5C6E',
+          tertiary: '#8F90A6',
+        },
+        // Background colors
+        background: '#F8F9FA',
+        surface: '#FFFFFF',
       },
       fontFamily: {
         sans: ['Open Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
