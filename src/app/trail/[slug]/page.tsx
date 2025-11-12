@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { TrailStats } from '@/components/trail/TrailStats';
-import { TrailMap } from '@/components/trail/TrailMap';
+import { MapView } from '@/components/map/MapView';
 import { TrailCard } from '@/components/trail/TrailCard';
 import { Button } from '@/components/common/Button';
 import type { Trail } from '@/types';
@@ -432,7 +432,7 @@ export default async function TrailPage({ params }: PageProps) {
 
                 {/* Map Card */}
                 <div className="card overflow-hidden">
-                  <TrailMap
+                  <MapView
                     latitude={parseFloat(trail.trailData.gpsLatitude)}
                     longitude={parseFloat(trail.trailData.gpsLongitude)}
                     trailName={trail.title}
