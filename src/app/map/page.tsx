@@ -48,6 +48,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'region-1',
+          databaseId: 1,
           name: 'Tatry Wysokie',
           slug: 'high-tatras',
         },
@@ -57,6 +58,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
@@ -66,6 +68,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -75,6 +78,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'feature-1',
+          databaseId: 1,
           name: 'Jezioro',
           slug: 'lake',
         },
@@ -116,6 +120,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'region-2',
+          databaseId: 2,
           name: 'Tatry Zachodnie',
           slug: 'western-tatras',
         },
@@ -125,6 +130,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
@@ -134,6 +140,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -143,6 +150,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'feature-2',
+          databaseId: 2,
           name: 'Szczyt',
           slug: 'peak',
         },
@@ -184,6 +192,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'region-2',
+          databaseId: 2,
           name: 'Tatry Zachodnie',
           slug: 'western-tatras',
         },
@@ -193,6 +202,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'season-1',
+          databaseId: 1,
           name: 'Lato',
           slug: 'summer',
         },
@@ -202,6 +212,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'type-1',
+          databaseId: 1,
           name: 'Tam i z powrotem',
           slug: 'out-and-back',
         },
@@ -211,6 +222,7 @@ const mockTrails: Trail[] = [
       nodes: [
         {
           id: 'feature-3',
+          databaseId: 3,
           name: 'Punkt widokowy',
           slug: 'viewpoint',
         },
