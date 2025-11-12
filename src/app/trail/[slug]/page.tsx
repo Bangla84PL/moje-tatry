@@ -511,7 +511,6 @@ export default async function TrailPage({ params }: PageProps) {
                     size="sm"
                     onClick={() => {
                       // TODO: Implement share functionality
-                      console.log('Share on Facebook');
                     }}
                   >
                     Facebook
@@ -521,7 +520,6 @@ export default async function TrailPage({ params }: PageProps) {
                     size="sm"
                     onClick={() => {
                       // TODO: Implement share functionality
-                      console.log('Share on Twitter');
                     }}
                   >
                     Twitter
@@ -531,7 +529,6 @@ export default async function TrailPage({ params }: PageProps) {
                     size="sm"
                     onClick={() => {
                       // TODO: Implement copy link
-                      console.log('Copy link');
                     }}
                   >
                     Kopiuj link

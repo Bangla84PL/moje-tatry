@@ -8,7 +8,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import type { Language, TrailFilters as TrailFiltersType, Difficulty } from '@/types';
+import type { Language, TrailFilters as TrailFiltersType } from '@/types';
 import { Button } from '@/components/common/Button';
 
 export interface TrailFiltersProps {

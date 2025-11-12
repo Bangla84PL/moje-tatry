@@ -90,21 +90,11 @@ export interface TaxonomyTerm {
   count?: number;
 }
 
-export interface Region extends TaxonomyTerm {
-  // Specific region properties if needed
-}
-
-export interface Season extends TaxonomyTerm {
-  // Specific season properties if needed
-}
-
-export interface TrailType extends TaxonomyTerm {
-  // Specific trail type properties if needed
-}
-
-export interface Feature extends TaxonomyTerm {
-  // Specific feature properties if needed
-}
+// Type aliases for taxonomy terms (can be extended with specific properties later)
+export type Region = TaxonomyTerm;
+export type Season = TaxonomyTerm;
+export type TrailType = TaxonomyTerm;
+export type Feature = TaxonomyTerm;
 
 // ============================================
 // Comment Types
