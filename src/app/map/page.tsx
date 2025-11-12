@@ -85,7 +85,7 @@ const mockTrails: Trail[] = [
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },
@@ -157,7 +157,7 @@ const mockTrails: Trail[] = [
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },
@@ -229,7 +229,7 @@ const mockTrails: Trail[] = [
       ],
     },
     language: {
-      code: 'PL',
+      code: 'pl',
       name: 'Polski',
     },
   },
