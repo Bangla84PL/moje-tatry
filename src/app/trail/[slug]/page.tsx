@@ -13,7 +13,7 @@ import { MapView } from '@/components/map/MapView';
 import { TrailCard } from '@/components/trail/TrailCard';
 import { Button } from '@/components/common/Button';
 import { ShareButtons } from '@/components/trail/ShareButtons';
-import { trailImages, galleryImages, DEFAULT_IMAGE } from '@/lib/images';
+import { trailImages, DEFAULT_IMAGE } from '@/lib/images';
 import type { Trail } from '@/types';
 
 // TODO: Replace with actual GraphQL query when WordPress is configured
