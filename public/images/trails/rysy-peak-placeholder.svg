@@ -1,0 +1,30 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A5F7A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B7F9A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="600" fill="url(#sky2)"/>
+
+  <!-- Snow caps -->
+  <polygon points="350,150 400,100 450,150" fill="white" opacity="0.9"/>
+  <polygon points="550,180 600,130 650,180" fill="white" opacity="0.9"/>
+
+  <!-- Mountains -->
+  <polygon points="0,500 250,180 500,380 800,250 800,600 0,600" fill="#3A4D61" opacity="0.9"/>
+  <polygon points="150,550 400,220 650,400 800,300 800,600 0,600" fill="#2C3E50" opacity="0.85"/>
+
+  <!-- Text -->
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="48" font-weight="bold"
+        fill="white" text-anchor="middle" stroke="#2C3E50" stroke-width="2">
+    Rysy Peak
+  </text>
+  <rect x="320" y="370" width="160" height="40" fill="#DC3545" opacity="0.9" rx="5"/>
+  <text x="400" y="397" font-family="Arial, sans-serif" font-size="20" font-weight="bold"
+        fill="white" text-anchor="middle">
+    DIFFICULT
+  </text>
+</svg>

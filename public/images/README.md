@@ -80,6 +80,23 @@ While Unsplash, Pexels, and Pixabay don't require attribution, it's good practic
 
 ## Download Instructions
 
+### Automated Download (Recommended)
+
+Run the provided script to automatically download high-quality images:
+
+```bash
+# From project root
+bash scripts/download-images.sh
+```
+
+This script will:
+- Download hero images from Pexels
+- Download trail featured images
+- Download gallery photos
+- Organize everything into proper directories
+
+### Manual Download
+
 1. Visit one of the free stock photo sites above
 2. Search for "Tatra Mountains", "Morskie Oko", "Zakopane", etc.
 3. Download high-resolution versions
@@ -88,3 +105,25 @@ While Unsplash, Pexels, and Pixabay don't require attribution, it's good practic
    - `/public/images/trails/` - Trail featured images
    - `/public/images/gallery/` - Gallery photos
    - `/public/images/placeholders/` - Temporary placeholders
+
+## Current Placeholder Images
+
+The following SVG placeholder images have been created as temporary stand-ins:
+
+### Hero Images
+- `hero/tatra-hero-placeholder.svg` - Main hero image with mountain silhouette
+
+### Trail Images
+- `trails/morskie-oko-placeholder.svg` - Moderate difficulty trail
+- `trails/rysy-peak-placeholder.svg` - Difficult trail
+- `trails/giewont-placeholder.svg` - Challenging trail
+
+### Gallery Images
+- `gallery/tatra-landscape-1.svg` - Spring meadow scene
+
+These SVG placeholders provide:
+- ✅ Proper dimensions (1920x1080 for hero, 800x600 for trails)
+- ✅ Mountain-themed graphics
+- ✅ Difficulty level indicators
+- ✅ Small file size (< 5KB each)
+- ✅ Professional appearance until real photos are added
