@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/common/Button';
 import { TrailCard } from '@/components/trail/TrailCard';
+import { heroImages, trailImages } from '@/lib/images';
 import type { Trail } from '@/types';
 
 // TODO: Replace with actual GraphQL query when WordPress is configured
@@ -28,11 +29,11 @@ const mockFeaturedTrails: Trail[] = [
     modified: '2024-01-15',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
-        altText: 'Morskie Oko',
+        sourceUrl: trailImages.morskieOko,
+        altText: 'Morskie Oko lake surrounded by mountain peaks in the Tatra Mountains',
         mediaDetails: {
-          width: 1920,
-          height: 1280,
+          width: 800,
+          height: 600,
         },
       },
     },
@@ -89,7 +90,168 @@ const mockFeaturedTrails: Trail[] = [
       name: 'Polski',
     },
   },
-  // Additional mock trails...
+  {
+    id: '2',
+    databaseId: 2,
+    title: 'Giewont',
+    slug: 'giewont',
+    excerpt: 'Kultowy szczyt z krzyżem, jeden z symboli Tatr. Wymagający, ale niezwykle nagradzający widokami szlak.',
+    content: '',
+    date: '2024-01-10',
+    modified: '2024-01-10',
+    featuredImage: {
+      node: {
+        sourceUrl: trailImages.giewont,
+        altText: 'Giewont peak with the iconic cross in the Tatra Mountains',
+        mediaDetails: {
+          width: 800,
+          height: 600,
+        },
+      },
+    },
+    trailData: {
+      difficulty: 'difficult',
+      distanceKm: 6.5,
+      elevationGainM: 1260,
+      estimatedTimeHours: 5.0,
+      gpsLatitude: '49.2458',
+      gpsLongitude: '19.9342',
+    },
+    regions: {
+      nodes: [
+        {
+          id: 'region-2',
+          databaseId: 2,
+          name: 'Tatry Zachodnie',
+          slug: 'western-tatras',
+        },
+      ],
+    },
+    seasons: {
+      nodes: [
+        {
+          id: 'season-2',
+          databaseId: 2,
+          name: 'Lato',
+          slug: 'summer',
+        },
+        {
+          id: 'season-3',
+          databaseId: 3,
+          name: 'Jesień',
+          slug: 'fall',
+        },
+      ],
+    },
+    trailTypes: {
+      nodes: [
+        {
+          id: 'type-1',
+          databaseId: 1,
+          name: 'Tam i z powrotem',
+          slug: 'out-and-back',
+        },
+      ],
+    },
+    features: {
+      nodes: [
+        {
+          id: 'feature-2',
+          databaseId: 2,
+          name: 'Szczyt',
+          slug: 'peak',
+        },
+        {
+          id: 'feature-3',
+          databaseId: 3,
+          name: 'Punkt widokowy',
+          slug: 'viewpoint',
+        },
+      ],
+    },
+    language: {
+      code: 'pl',
+      name: 'Polski',
+    },
+  },
+  {
+    id: '3',
+    databaseId: 3,
+    title: 'Dolina Pięciu Stawów',
+    slug: 'dolina-pieciu-stawow',
+    excerpt: 'Przepiękna dolina z pięcioma jeziorami polodowcowymi. Długi, ale relatywnie łatwy szlak dla każdego.',
+    content: '',
+    date: '2024-01-05',
+    modified: '2024-01-05',
+    featuredImage: {
+      node: {
+        sourceUrl: trailImages.pieciuStawow,
+        altText: 'Valley of Five Lakes in the Tatra Mountains with crystal clear alpine lakes',
+        mediaDetails: {
+          width: 800,
+          height: 600,
+        },
+      },
+    },
+    trailData: {
+      difficulty: 'moderate',
+      distanceKm: 15.0,
+      elevationGainM: 650,
+      estimatedTimeHours: 6.5,
+      gpsLatitude: '49.2156',
+      gpsLongitude: '20.0125',
+    },
+    regions: {
+      nodes: [
+        {
+          id: 'region-1',
+          databaseId: 1,
+          name: 'Tatry Wysokie',
+          slug: 'high-tatras',
+        },
+      ],
+    },
+    seasons: {
+      nodes: [
+        {
+          id: 'season-2',
+          databaseId: 2,
+          name: 'Lato',
+          slug: 'summer',
+        },
+      ],
+    },
+    trailTypes: {
+      nodes: [
+        {
+          id: 'type-1',
+          databaseId: 1,
+          name: 'Tam i z powrotem',
+          slug: 'out-and-back',
+        },
+      ],
+    },
+    features: {
+      nodes: [
+        {
+          id: 'feature-1',
+          databaseId: 1,
+          name: 'Jezioro',
+          slug: 'lake',
+        },
+        {
+          id: 'feature-3',
+          databaseId: 3,
+          name: 'Punkt widokowy',
+          slug: 'viewpoint',
+        },
+      ],
+    },
+    language: {
+      code: 'pl',
+      name: 'Polski',
+    },
+  },
 ];
 
 const quickFilters = [
@@ -113,12 +275,13 @@ export default function HomePage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero-background.jpg"
-            alt="Tatra Mountains"
+            src={heroImages.main}
+            alt="Beautiful panoramic view of Tatra Mountains with dramatic peaks and valleys"
             fill
             priority
             className="object-cover"
             sizes="100vw"
+            unoptimized
           />
           {/* Overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" />

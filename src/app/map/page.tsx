@@ -9,6 +9,7 @@
 
 import { useState, useMemo } from 'react';
 import { InteractiveMap } from '@/components/map/InteractiveMap';
+import { trailImages } from '@/lib/images';
 import type { Trail, TrailFilters, Difficulty, MarkerData } from '@/types';
 
 // TODO: Replace with actual GraphQL query when WordPress is configured
@@ -28,7 +29,7 @@ const mockTrails: Trail[] = [
     modified: '2024-01-15',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
+        sourceUrl: trailImages.morskieOko,
         altText: 'Morskie Oko',
         mediaDetails: {
           width: 1920,
@@ -100,7 +101,7 @@ const mockTrails: Trail[] = [
     modified: '2024-01-10',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
+        sourceUrl: trailImages.morskieOko,
         altText: 'Giewont',
         mediaDetails: {
           width: 1920,
@@ -172,7 +173,7 @@ const mockTrails: Trail[] = [
     modified: '2024-01-05',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
+        sourceUrl: trailImages.morskieOko,
         altText: 'Dolina Kościeliska',
         mediaDetails: {
           width: 1920,
