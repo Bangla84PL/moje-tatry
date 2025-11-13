@@ -1,0 +1,25 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="spring" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7FB3D5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8E6F0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1200" height="800" fill="url(#spring)"/>
+
+  <!-- Meadow -->
+  <rect x="0" y="550" width="1200" height="250" fill="#8BC34A"/>
+
+  <!-- Mountains -->
+  <polygon points="0,550 300,250 600,400 900,200 1200,450 1200,800 0,800" fill="#2C5F2D" opacity="0.85"/>
+  <polygon points="200,600 500,300 800,450 1100,280 1200,500 1200,800 0,800" fill="#1E4020" opacity="0.75"/>
+
+  <!-- Flowers -->
+  <circle cx="150" cy="650" r="8" fill="#FFC857"/>
+  <circle cx="350" cy="680" r="8" fill="#FF6B6B"/>
+  <circle cx="550" cy="670" r="8" fill="#FFC857"/>
+  <circle cx="750" cy="690" r="8" fill="#B8E6F0"/>
+  <circle cx="950" cy="660" r="8" fill="#FFC857"/>
+</svg>
