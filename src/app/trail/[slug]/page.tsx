@@ -13,6 +13,7 @@ import { MapView } from '@/components/map/MapView';
 import { TrailCard } from '@/components/trail/TrailCard';
 import { Button } from '@/components/common/Button';
 import { ShareButtons } from '@/components/trail/ShareButtons';
+import { trailImages, galleryImages, DEFAULT_IMAGE } from '@/lib/images';
 import type { Trail } from '@/types';
 
 // TODO: Replace with actual GraphQL query when WordPress is configured
@@ -52,7 +53,7 @@ const mockTrails: Record<string, Trail> = {
     modified: '2024-01-15',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
+        sourceUrl: trailImages.morskieOko,
         altText: 'Morskie Oko lake surrounded by mountains',
         mediaDetails: {
           width: 1920,
@@ -154,7 +155,7 @@ const mockTrails: Record<string, Trail> = {
     modified: '2024-01-10',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
+        sourceUrl: trailImages.morskieOko,
         altText: 'Giewont peak with cross',
         mediaDetails: {
           width: 1920,
@@ -244,7 +245,7 @@ const mockTrails: Record<string, Trail> = {
     modified: '2024-01-05',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
+        sourceUrl: trailImages.morskieOko,
         altText: 'Dolina Kościeliska valley',
         mediaDetails: {
           width: 1920,
@@ -387,7 +388,7 @@ export default async function TrailPage({ params }: PageProps) {
       {/* Hero Image Section */}
       <div className="relative h-[400px] md:h-[500px] lg:h-[600px]">
         <Image
-          src={trail.featuredImage?.node?.sourceUrl || '/images/placeholder-trail.jpg'}
+          src={trail.featuredImage?.node?.sourceUrl || DEFAULT_IMAGE}
           alt={trail.featuredImage?.node?.altText || trail.title}
           fill
           priority

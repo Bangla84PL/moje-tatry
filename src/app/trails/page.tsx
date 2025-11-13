@@ -11,6 +11,7 @@ import { useState, useMemo } from 'react';
 import { TrailCard } from '@/components/trail/TrailCard';
 import { TrailFilters } from '@/components/trail/TrailFilters';
 import { Button } from '@/components/common/Button';
+import { trailImages } from '@/lib/images';
 import type { Trail, TrailFilters as TrailFiltersType } from '@/types';
 
 // TODO: Replace with actual GraphQL query when WordPress is configured
@@ -30,9 +31,9 @@ const mockTrails: Trail[] = [
     modified: '2024-01-15',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
-        altText: 'Morskie Oko',
-        mediaDetails: { width: 1920, height: 1280 },
+        sourceUrl: trailImages.morskieOko,
+        altText: 'Morskie Oko lake surrounded by mountain peaks in the Tatra Mountains',
+        mediaDetails: { width: 800, height: 600 },
       },
     },
     trailData: {
@@ -68,9 +69,9 @@ const mockTrails: Trail[] = [
     modified: '2024-01-14',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
-        altText: 'Giewont',
-        mediaDetails: { width: 1920, height: 1280 },
+        sourceUrl: trailImages.giewont,
+        altText: 'Giewont peak with the iconic cross in the Tatra Mountains',
+        mediaDetails: { width: 800, height: 600 },
       },
     },
     trailData: {
@@ -112,9 +113,9 @@ const mockTrails: Trail[] = [
     modified: '2024-01-13',
     featuredImage: {
       node: {
-        sourceUrl: '/images/placeholder-trail.jpg',
-        altText: 'Dolina Kościeliska',
-        mediaDetails: { width: 1920, height: 1280 },
+        sourceUrl: trailImages.koscieliska,
+        altText: 'Beautiful Kościeliska Valley in the Western Tatra Mountains',
+        mediaDetails: { width: 800, height: 600 },
       },
     },
     trailData: {
